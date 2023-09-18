@@ -14,11 +14,11 @@ public class Main {
 
         BMW.drive();
         System.out.println(BMW.returnAWDStatus());
-
         System.out.println(BMW.horsePower);
         System.out.println(BMW.wheelSize);
-        System.out.println(BMW.isAWD);
 
+
+        System.out.println(BMW.isAWD);
         printCarHorsePower(BMW);
         printCarHorsePower(Audi);
 
@@ -32,7 +32,7 @@ public class Main {
 
     }
 
-    public static void printCarHorsePower(Car inputCar){
+    public static void printCarHorsePower(Car inputCar) {
         System.out.println(inputCar.horsePower);
     }
 }
