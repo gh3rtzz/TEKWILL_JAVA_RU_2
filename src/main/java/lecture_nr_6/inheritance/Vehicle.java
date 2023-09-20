@@ -7,6 +7,10 @@ public class Vehicle {
     String color;
     String VIN;
 
+    public void travel(){
+        System.out.println("Vehicle is travelling");
+    }
+
     public Vehicle(int nrOfSeats, int freightWeight, String color, String VIN) {
         this.nrOfSeats = nrOfSeats;
         this.freightWeight = freightWeight;

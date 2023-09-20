@@ -13,6 +13,11 @@ public class Plane extends Vehicle{
         this.nrOfEngines = nrOfEngines;
     }
 
+//    @Override
+//    public void travel() {
+//        System.out.println("Plane is flying..");
+//    }
+
     public String getPlaneManufacturer() {
         return planeManufacturer;
     }
