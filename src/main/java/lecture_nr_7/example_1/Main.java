@@ -1,5 +1,9 @@
 package lecture_nr_7.example_1;
 
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Main {
 
     public static void main(String[] args) {
