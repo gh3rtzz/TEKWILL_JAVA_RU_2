@@ -1,11 +1,11 @@
 package lecture_nr_14.genericClass;
 
-public class FootBallPlayer {
+public class FootBallPlayer extends Player{
 
-    String name;
     FootBallPlayerPositions position;
 
     public FootBallPlayer(String name, FootBallPlayerPositions position) {
+        super(name);
         this.name = name;
         this.position = position;
     }

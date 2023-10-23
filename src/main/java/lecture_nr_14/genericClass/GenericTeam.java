@@ -3,7 +3,7 @@ package lecture_nr_14.genericClass;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenericTeam<T>{
+public class GenericTeam<T extends Player>{
 
     private final String teamName;
     private List<T> teamList;
@@ -17,6 +17,14 @@ public class GenericTeam<T>{
         nrOfWins = 0;
         nrOfLosses = 0;
         nrOfDraws = 0;
+    }
+
+    public void printAllPlayersList(){
+        for (T element :
+                teamList) {
+            System.out.println(element.name);
+        }
+
     }
 
     public void addPlayersToList(T... inputPlayers){

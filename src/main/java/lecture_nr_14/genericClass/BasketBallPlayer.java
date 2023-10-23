@@ -1,12 +1,11 @@
 package lecture_nr_14.genericClass;
 
-public class BasketBallPlayer {
+public class BasketBallPlayer extends Player{
 
-    String name;
     BasketBallPositions position;
 
     public BasketBallPlayer(String name, BasketBallPositions position) {
-        this.name = name;
+        super(name);
         this.position = position;
     }
 }
