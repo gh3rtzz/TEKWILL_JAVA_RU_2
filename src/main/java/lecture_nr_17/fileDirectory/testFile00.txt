@@ -1,0 +1,3 @@
+
+Adding a string from java!
+Hooray! It's not me typing, it's java!
