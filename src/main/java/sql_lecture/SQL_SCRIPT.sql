@@ -263,7 +263,143 @@ group by name;
 select max(weight) as maximum_weight
 from employee_info ei;
 
+----------- Lecture 3. Relational DB, Joins, Indexing
 
+select *
+from employee_info ei;
+
+truncate employee_info;
+
+create table employee_address(
+                                 id serial primary key,
+                                 country text not null,
+                                 city text not null,
+                                 address_line_1 text not null,
+                                 address_line_2 text,
+                                 zip_code text,
+                                 fk_employee int,
+                                 constraint employee_fk
+                                     foreign key (fk_employee)
+                                         references employee_info(employee_id)
+);
+
+select *
+from employee_info ei;
+
+select *
+from employee_address;
+
+insert into employee_address (country, city, address_line_1, fk_employee)
+values
+    ('RO', 'Bucharest', 'str. Parlamentului 33', 8),
+    ('NL', 'Amsterdam', 'str. Highsociety 123', 9);
+
+select *
+from employee_info ei
+         left join employee_address ea
+                   on ei.employee_id = ea.fk_employee;
+
+alter table employee_address rename column id to address_id;
+
+create table departments(
+                            department_id serial primary key,
+                            name text not null,
+                            description text
+);
+
+insert into departments (name, description)
+values
+    ('Software engineering', 'Everything software related is happening here'),
+    ('Hardware engineering', 'Creating motherboards and other cool stuff happens here'),
+    ('Accounting', 'Salary related and other important stuff is here'),
+    ('HR', 'Human resources planning is happening here');
+
+select *
+from departments;
+
+create table employee_department(
+                                    employee_department_id serial primary key,
+                                    fk_employee int references employee_info(employee_id),
+                                    fk_department int references departments(department_id)
+);
+
+select *
+from employee_department;
+
+select *
+from employee_info ei;
+
+insert into employee_department (fk_employee, fk_department)
+values
+    (7, 1),
+    (8, 2),
+    (9, 3),
+    (10, 4);
+
+--- Multiple joins
+
+select *
+from employee_info ei
+         inner join employee_department ed
+                    on ei.employee_id = ed.fk_employee
+         inner join departments d
+                    on ed.fk_department = d.department_id;
+
+
+create table customer(
+                         customer_id serial primary key,
+                         name text,
+                         fiscal_code text
+);
+
+create table department_customer(
+                                    department_customer_id serial primary key,
+                                    fk_department int references departments(department_id),
+                                    fk_customer int references customer(customer_id)
+);
+
+select *
+from customer;
+
+insert into customer (name, fiscal_code)
+values
+    ('Apple Inc.', '128976123'),
+    ('Alphabet LLC', '123892374'),
+    ('Tekwill Academy SRL', '8912876391'),
+    ('Cloudflare LLC', '129087123');
+
+insert into department_customer (fk_department, fk_customer)
+values
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4);
+
+select * from departments;
+
+select *
+from employee_info ei
+         inner join employee_department ed on ei.employee_id = ed.fk_employee
+         inner join departments d on ed.fk_department = d.department_id
+         inner join department_customer dc on d.department_id = dc.fk_department
+         inner join customer c on dc.fk_customer = c.customer_id;
+
+
+select *
+from employee_info ei
+         inner join employee_department ed on ei.employee_id = ed.fk_employee
+         inner join departments d on ed.fk_department = d.department_id
+         inner join department_customer dc on d.department_id = dc.fk_department
+         inner join customer c on dc.fk_customer = c.customer_id;
+
+
+
+select ei.name, d.name
+from customer c
+         inner join department_customer dc on c.customer_id = dc.fk_customer
+         inner join departments d on dc.fk_department = d.department_id
+         inner join employee_department ed on d.department_id = ed.fk_department
+         inner join employee_info ei on ed.fk_employee = ei.employee_id;
 
 
 
